@@ -46,9 +46,9 @@ server.get('/broadcast/:message', function(req, res, next) {
   var message = new gcm.Message();
   message.addDataWithKeyValue('message',req.params.message);
   sender.send(message, gcmClients, 4, function(err, result) {
-    console.log(result);
+    res.send(result);
+    return next();
   });
-  return next();
 });
 
 var port = process.env.PORT || 8080;
